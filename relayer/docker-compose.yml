@@ -1,0 +1,22 @@
+services:
+  relayer:
+    image: gcr.io/abacus-labs-dev/hyperlane-agent:agents-v2.0.0
+    container_name: relayer
+    command: ./relayer
+    env_file: .env
+    environment:
+      - CONFIG_FILES=/config/agent-config.json
+      - HYP_RELAYCHAINS=genesisl1,base
+      - HYP_ALLOWLOCALCHECKPOINTSYNCERS=true
+      - HYP_GASPAYMENTENFORCEMENT=[{"type":"none"}]
+      - HYP_CHAINS_BASE_TRANSACTIONOVERRIDES_MAXFEEPERGAS=2000000000
+      - HYP_CHAINS_BASE_TRANSACTIONOVERRIDES_MAXPRIORITYFEEPERGAS=100000000
+      - HYP_CHAINS_BASE_TRANSACTIONOVERRIDES_GASPRICECAP=5000000000
+      - HYP_DEFAULTSIGNER_TYPE=hexKey
+      - HYP_DB=/data/relayer-db
+      - HYP_LOG_FORMAT=pretty
+      - HYP_LOG_LEVEL=info
+    volumes:
+      - ../config:/config:ro
+      - ./db/relayer:/data
+    restart: unless-stopped

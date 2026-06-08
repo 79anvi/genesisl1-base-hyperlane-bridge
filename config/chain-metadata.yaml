@@ -1,0 +1,24 @@
+# Human-readable chain metadata. Mirrors agent-config.json.
+# Useful for tooling, UIs, and scripts.
+
+genesisl1:
+  chainId: 29
+  domainId: 29
+  rpc: "https://rpc.genesisl1.org"
+  explorer: "https://explorer.genesisl1.org"
+  nativeSymbol: L1
+  nativeDecimals: 18
+  recommendedGasPrice: 70000000000  # 70 gwei
+  estimateGasWorks: false  # known issue, always pass gasLimit explicitly
+
+base:
+  chainId: 8453
+  domainId: 8453
+  rpc: "https://mainnet.base.org"
+  rpcFallback:
+    - "https://base.llamarpc.com"
+    - "https://base-rpc.publicnode.com"
+  explorer: "https://basescan.org"
+  nativeSymbol: ETH
+  nativeDecimals: 18
+  estimateGasWorks: true

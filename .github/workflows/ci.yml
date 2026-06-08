@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          for f in $(find . -name '*.json' -not -path './node_modules/*'); do
+            echo "Checking $f"
+            jq . "$f" > /dev/null
+          done
+
+      - name: Validate YAML files
+        run: |
+          python3 -c "
+          import yaml, sys, pathlib
+          for p in pathlib.Path('.').rglob('*.yaml'):
+            if 'node_modules' in p.parts: continue
+            print(f'Checking {p}')
+            yaml.safe_load(p.read_text())
+          "
+
+      - name: Shellcheck scripts
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './scripts'
+
+      - name: Shellcheck monitoring
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './monitoring'
+
+      - name: Validate docker compose files
+        run: |
+          cd validator && docker compose config -q
+          cd ../relayer && docker compose config -q

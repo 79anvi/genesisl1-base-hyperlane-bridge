@@ -1,0 +1,77 @@
+{
+  "chains": {
+    "genesisl1": {
+      "name": "genesisl1",
+      "chainId": 29,
+      "domainId": 29,
+      "protocol": "ethereum",
+      "displayName": "GenesisL1",
+      "nativeToken": {
+        "name": "L1coin",
+        "symbol": "L1",
+        "decimals": 18
+      },
+      "rpcUrls": [
+        { "http": "https://rpc.genesisl1.org" }
+      ],
+      "blockExplorers": [
+        {
+          "name": "GenesisL1 Explorer",
+          "url": "https://explorer.genesisl1.org",
+          "apiUrl": "https://explorer.genesisl1.org/api",
+          "family": "blockscout"
+        }
+      ],
+      "mailbox": "0xE6522A891702Cd2E8CC2A5182638c9DA1DD44B22",
+      "validatorAnnounce": "0x4AEcDf823ECe5808bE25daB0987152eB87E4BC52",
+      "merkleTreeHook": "0x8516B39Bca0f12f82B79065E633B8301eA5F0480",
+      "staticMerkleRootMultisigIsmFactory": "0xE42eE416739D6beda0150F6951dF293AaB1ed27A",
+      "staticMessageIdMultisigIsmFactory": "0x64E8De806F12a8dB8c04906838c87346D869bDa4",
+      "proxyAdmin": "0x8F03945D995B34F737C842F7eD0511433e8E60ce",
+      "index": {
+        "from": 1
+      },
+      "blocks": {
+        "confirmations": 1,
+        "reorgPeriod": 1
+      }
+    },
+    "base": {
+      "name": "base",
+      "chainId": 8453,
+      "domainId": 8453,
+      "protocol": "ethereum",
+      "displayName": "Base",
+      "nativeToken": {
+        "name": "Ether",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "rpcUrls": [
+        { "http": "https://mainnet.base.org" },
+        { "http": "https://base.llamarpc.com" },
+        { "http": "https://base-rpc.publicnode.com" }
+      ],
+      "blockExplorers": [
+        {
+          "name": "Basescan",
+          "url": "https://basescan.org",
+          "apiUrl": "https://api.basescan.org/api",
+          "family": "etherscan"
+        }
+      ],
+      "mailbox": "0xeA87ae93Fa0019a82A727bfd3eBd1cFCa8f64f1D",
+      "validatorAnnounce": "0x182E8d7c5F1B06201b102123FC7dF0EaeB445a7B",
+      "merkleTreeHook": "0x19dc38aeae620380430C200a6E990D5Af5480117",
+      "staticMerkleRootMultisigIsmFactory": "0x8b83fefd896fAa52057798f6426E9f0B080FCCcE",
+      "interchainGasPaymaster": "0xc3F23848Ed2e04C0c6d41bd7804fa8f89F940B94",
+      "index": {
+        "from": 1
+      },
+      "blocks": {
+        "confirmations": 1,
+        "reorgPeriod": 1
+      }
+    }
+  }
+}

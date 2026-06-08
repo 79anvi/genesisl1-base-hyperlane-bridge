@@ -1,0 +1,28 @@
+# Secrets — never commit
+**/.env
+**/.env.local
+**/secrets/
+**/*.key
+**/keystore/
+
+# Runtime data
+**/db/
+**/data/
+**/signatures/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Docker
+.docker/
+
+# Node (if tooling gets added later)
+node_modules/

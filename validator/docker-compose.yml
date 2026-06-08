@@ -1,0 +1,46 @@
+services:
+  validator_genesisl1:
+    image: gcr.io/abacus-labs-dev/hyperlane-agent:agents-v2.0.0
+    container_name: validator-genesisl1
+    command: ./validator
+    env_file: .env
+    environment:
+      - CONFIG_FILES=/config/agent-config.json
+      - HYP_ORIGINCHAINNAME=genesisl1
+      - HYP_REORGPERIOD=1
+      - HYP_INTERVAL=5
+      - HYP_CHECKPOINTSYNCER_TYPE=localStorage
+      - HYP_CHECKPOINTSYNCER_PATH=/signatures/genesisl1
+      - HYP_VALIDATOR_TYPE=hexKey
+      - HYP_CHAINS_GENESISL1_SIGNER_TYPE=hexKey
+      - HYP_DB=/data/validator-db
+      - HYP_LOG_FORMAT=pretty
+      - HYP_LOG_LEVEL=info
+    volumes:
+      - ../config:/config:ro
+      - ./signatures/genesisl1:/signatures/genesisl1
+      - ./db/validator-genesisl1:/data
+    restart: unless-stopped
+
+  validator_base:
+    image: gcr.io/abacus-labs-dev/hyperlane-agent:agents-v2.0.0
+    container_name: validator-base
+    command: ./validator
+    env_file: .env
+    environment:
+      - CONFIG_FILES=/config/agent-config.json
+      - HYP_ORIGINCHAINNAME=base
+      - HYP_REORGPERIOD=1
+      - HYP_INTERVAL=5
+      - HYP_CHECKPOINTSYNCER_TYPE=localStorage
+      - HYP_CHECKPOINTSYNCER_PATH=/signatures/base
+      - HYP_VALIDATOR_TYPE=hexKey
+      - HYP_CHAINS_BASE_SIGNER_TYPE=hexKey
+      - HYP_DB=/data/validator-base
+      - HYP_LOG_FORMAT=pretty
+      - HYP_LOG_LEVEL=info
+    volumes:
+      - ../config:/config:ro
+      - ./signatures/base:/signatures/base
+      - ./db/validator-base:/data
+    restart: unless-stopped
