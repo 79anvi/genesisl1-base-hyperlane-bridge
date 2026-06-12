@@ -12,13 +12,22 @@ This repository contains everything needed to:
 
 > ## ⚠️ READ THIS FIRST — [DISCLAIMER.md](DISCLAIMER.md)
 >
-> **This is open-source, decentralized, experimental software provided
-> "AS-IS" with NO WARRANTY and NO LIABILITY.** There are real financial,
-> technical, and smart-contract risks. By running any of the components in
-> this repository or interacting with the bridge, **you accept full
-> responsibility for your funds, your infrastructure, and your users.**
+> **This is open-source, decentralized, _exceptionally experimental_ software
+> provided "AS-IS" and "AS-AVAILABLE" with NO WARRANTY and NO LIABILITY of any
+> kind.** It is a community-run experiment, not a product or a service. There
+> is no support, no SLA, no backstop, and no one obligated to make you whole.
+> It can break or stop permanently at any time, and anything you put through it
+> can be lost forever. **Use it only with funds, hardware, and time you can
+> afford to lose entirely.**
+>
+> **Validators and relayers:** you run **neutral, non-custodial, automated
+> infrastructure**. You do not take custody of user funds, you are not a
+> counterparty to any user, and the disclaimer is written to protect you from
+> liability for what users do. See
+> **[§3 — Protection for Validators and Relayers](DISCLAIMER.md#3-protection-for-validators-and-relayers)**.
 >
 > Full terms: **[DISCLAIMER.md](DISCLAIMER.md)** — read before proceeding.
+
 
 ## Quick Links
 
