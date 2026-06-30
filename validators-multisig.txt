@@ -1,0 +1,75 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                GENESISL1  ·  HYPERLANE VALIDATOR-SET MULTISIG                ║
+║               Safe (Gnosis)   3-of-5   ·   v1.4.1   ·   SafeL2               ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+  Purpose : Governance authority over the Hyperlane Interchain Security
+            Module (ISM) for the GenesisL1 <-> Base warp route. This Safe
+            owns the warp-route contracts and rotates the validator set.
+
+  Chain   : GenesisL1  (EVM)
+  RPC     : https://rpc.genesisl1.org
+  Status  : DEPLOYED & VERIFIED  [OK]
+
+┌─ MULTISIG ───────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│ Safe address      0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                 │
+│ Type              SafeL2 proxy (event-emitting)                              │
+│ Version           1.4.1                                                      │
+│ Threshold         3 of 5                                                     │
+│ saltNonce         0                                                          │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ OWNERS  (signers) ──────────────────────────────────────────────────────────┐
+│                                                                              │
+│ 1   0x65cdA1492278722F3380f6aFfEa5b5C9Da999dae                               │
+│ 2   0x411189289d01C615420b5FdE3b66c04652Bb9321                               │
+│ 3   0x824DceD6A5A7d4c66409654457E12D4986fAbC6b                               │
+│ 4   0x6F6D2E0Eb86eeD569499cc9fFD2a065Ad9aa8a43                               │
+│ 5   0xc908bcBD8a0Ff765A902C490CF0A4CA8B0703265                               │
+│                                                                              │
+│ Any 3 of 5 signatures authorize a transaction.                               │
+│ Cold governance keys -- distinct from validators' hot                        │
+│ checkpoint-signing keys.                                                     │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ SAFE INFRASTRUCTURE  (self-deployed, non-canonical) ────────────────────────┐
+│                                                                              │
+│ Singleton  (SafeL2)    0xe673a117B44f025fC04A6e40c4355BF96Da70b02            │
+│ ProxyFactory           0x278823e8443aB80cF57aA9A8AaBB92C1d2707806            │
+│ FallbackHandler        0xD337eAB895Cf8d611FeeAe1c5CB64b3a9A54C293            │
+│ MultiSend              -- not deployed (single-tx only)                      │
+│                                                                              │
+│ Built from audited v1.4.1 bytecode and deployed manually: GenesisL1          │
+│ enforces EIP-155, so the canonical Safe singleton factory was                │
+│ unavailable. Addresses therefore differ from the Base deployment.            │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ DEPLOYMENT RECORD ──────────────────────────────────────────────────────────┐
+│                                                                              │
+│ Tx hash                                                                      │
+│    0x895023a6679d9c06d462a65526a0fb7eaf8db57ed456edf2c340c2ec55ee805c        │
+│ Block        13,211,973                                                      │
+│ Deployer     0xF4e1AA6f26B7DA48EeAD9B24a97927303eeA07b8                      │
+│ Gas used     352,788                                                         │
+│ Method       SafeProxyFactory.createProxyWithNonce(singleton, init, 0)       │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFY  (re-runnable) ──────────────────────────────────────────────────────┐
+│                                                                              │
+│ export GL1=https://rpc.genesisl1.org                                         │
+│ export SAFE=0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                       │
+│                                                                              │
+│ cast call $SAFE "getOwners()(address[])"  --rpc-url $GL1                     │
+│ cast call $SAFE "getThreshold()(uint256)" --rpc-url $GL1                     │
+│ cast call $SAFE "VERSION()(string)"       --rpc-url $GL1                     │
+│                                                                              │
+│ Expected ->  5 owners  ·  3  ·  "1.4.1"                                      │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
