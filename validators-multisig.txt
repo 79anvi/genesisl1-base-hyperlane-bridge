@@ -1,29 +1,30 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
-║                GENESISL1  ·  HYPERLANE VALIDATOR-SET MULTISIG                ║
-║               Safe (Gnosis)   3-of-5   ·   v1.4.1   ·   SafeL2               ║
+║         GENESISL1  <->  BASE   ·   HYPERLANE VALIDATOR-SET MULTISIG          ║
+║          Two Safes (one per chain)   ·   3-of-5   ·   shared owners          ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
   Purpose : Governance authority over the Hyperlane Interchain Security
-            Module (ISM) for the GenesisL1 <-> Base warp route. This Safe
-            owns the warp-route contracts and rotates the validator set.
+            Modules (ISMs) of the wL1 warp route. One Safe per chain owns
+            that chain's warp router and rotates its validator set.
 
-  Chain   : GenesisL1  (EVM)
-  RPC     : https://rpc.genesisl1.org
-  Status  : DEPLOYED & VERIFIED  [OK]
+  Status  : Both Safes DEPLOYED & VERIFIED [OK].
+            Router/admin ownership handover still PENDING (Stage 3).
 
-┌─ MULTISIG ───────────────────────────────────────────────────────────────────┐
+┌─ GOVERNANCE SAFES ───────────────────────────────────────────────────────────┐
 │                                                                              │
-│ Safe address      0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                 │
-│ Type              SafeL2 proxy (event-emitting)                              │
-│ Version           1.4.1                                                      │
-│ Threshold         3 of 5                                                     │
-│ saltNonce         0                                                          │
+│ GenesisL1 Safe   0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                  │
+│                  v1.4.1 · SafeL2 · self-deployed (non-canonical)             │
+│                                                                              │
+│ Base Safe        0x097430cAA419Bd84aB14C0802b8DF6F01a14fCe6                  │
+│                  v1.4.1 · deployed via app.safe.global (canonical)           │
+│                                                                              │
+│ Both 3-of-5, with the identical owner set below.                             │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
-┌─ OWNERS  (signers) ──────────────────────────────────────────────────────────┐
+┌─ OWNERS  (signers -- same on BOTH Safes) ────────────────────────────────────┐
 │                                                                              │
 │ 1   0x65cdA1492278722F3380f6aFfEa5b5C9Da999dae                               │
 │ 2   0x411189289d01C615420b5FdE3b66c04652Bb9321                               │
@@ -37,39 +38,66 @@
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
-┌─ SAFE INFRASTRUCTURE  (self-deployed, non-canonical) ────────────────────────┐
+┌─ GOVERNANCE TARGETS  (handover pending -- Stage 3) ──────────────────────────┐
+│                                                                              │
+│ GenesisL1 Safe   0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                  │
+│    controls warp router  0x05Cd463228768Bec155CBe9180E95652490beCf6          │
+│    -> rotates ISM        0x5aD803d8635eE8a065938d3F36A85baecF517712          │
+│    -> secures   Base -> GenesisL1                                            │
+│                                                                              │
+│ Base Safe        0x097430cAA419Bd84aB14C0802b8DF6F01a14fCe6                  │
+│    controls warp router  0xE6522A891702Cd2E8CC2A5182638c9DA1DD44B22          │
+│    -> rotates ISM        0xab41B4A43f10fBdd10381fBA2BB8A95A59938f7C          │
+│    -> secures   GenesisL1 -> Base                                            │
+│                                                                              │
+│ Until Stage 3 transferOwnership, both routers are still owned by             │
+│ the deployer EOA 0xF4e1AA6f26B7DA48EeAD9B24a97927303eeA07b8.                 │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌─ GENESISL1 SAFE -- INFRASTRUCTURE  (self-deployed) ──────────────────────────┐
 │                                                                              │
 │ Singleton  (SafeL2)    0xe673a117B44f025fC04A6e40c4355BF96Da70b02            │
 │ ProxyFactory           0x278823e8443aB80cF57aA9A8AaBB92C1d2707806            │
 │ FallbackHandler        0xD337eAB895Cf8d611FeeAe1c5CB64b3a9A54C293            │
 │ MultiSend              -- not deployed (single-tx only)                      │
 │                                                                              │
-│ Built from audited v1.4.1 bytecode and deployed manually: GenesisL1          │
-│ enforces EIP-155, so the canonical Safe singleton factory was                │
-│ unavailable. Addresses therefore differ from the Base deployment.            │
+│ GenesisL1 enforces EIP-155, so the canonical Safe singleton factory          │
+│ was unavailable; contracts were deployed manually from audited v1.4.1        │
+│ bytecode. The Base Safe uses canonical Safe infra (nothing self-deployed).   │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 ┌─ DEPLOYMENT RECORD ──────────────────────────────────────────────────────────┐
 │                                                                              │
-│ Tx hash                                                                      │
-│    0x895023a6679d9c06d462a65526a0fb7eaf8db57ed456edf2c340c2ec55ee805c        │
-│ Block        13,211,973                                                      │
-│ Deployer     0xF4e1AA6f26B7DA48EeAD9B24a97927303eeA07b8                      │
-│ Gas used     352,788                                                         │
-│ Method       SafeProxyFactory.createProxyWithNonce(singleton, init, 0)       │
+│ GenesisL1 Safe                                                               │
+│    Tx     0x895023a6679d9c06d462a65526a0fb7eaf8db57ed456edf2c340c2ec55ee805c │
+│    Block  13,211,973   Gas 352,788   Deployer 0xF4e1AA6f26B7DA48EeAD9B24a9792│
+│    Method SafeProxyFactory.createProxyWithNonce(singleton, init, 0)          │
+│                                                                              │
+│ Base Safe                                                                    │
+│    Deployed via app.safe.global (UI) -- no manual tx recorded.               │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 ┌─ VERIFY  (re-runnable) ──────────────────────────────────────────────────────┐
 │                                                                              │
 │ export GL1=https://rpc.genesisl1.org                                         │
-│ export SAFE=0x6D0A429Ecd85f3edc93722C2d25090DC722601b1                       │
+│ export BASE=<your Base RPC>                                                  │
 │                                                                              │
-│ cast call $SAFE "getOwners()(address[])"  --rpc-url $GL1                     │
-│ cast call $SAFE "getThreshold()(uint256)" --rpc-url $GL1                     │
-│ cast call $SAFE "VERSION()(string)"       --rpc-url $GL1                     │
+│ # GenesisL1 Safe                                                             │
+│ cast call 0x6D0A429Ecd85f3edc93722C2d25090DC722601b1 "getOwners()(address[])"│
+│ cast call 0x6D0A429Ecd85f3edc93722C2d25090DC722601b1 "getThreshold()(uint256)│
+│ cast call 0x6D0A429Ecd85f3edc93722C2d25090DC722601b1 "VERSION()(string)"     │
 │                                                                              │
-│ Expected ->  5 owners  ·  3  ·  "1.4.1"                                      │
+│ # Base Safe                                                                  │
+│ cast call 0x097430cAA419Bd84aB14C0802b8DF6F01a14fCe6 "getOwners()(address[])"│
+│ cast call 0x097430cAA419Bd84aB14C0802b8DF6F01a14fCe6 "getThreshold()(uint256)│
+│ cast call 0x097430cAA419Bd84aB14C0802b8DF6F01a14fCe6 "VERSION()(string)"     │
+│                                                                              │
+│ Each ->  5 owners (same set)  ·  3  ·  "1.4.1"                               │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
+
+
+  Generated 2026-06-30  ·  keep in sync with on-chain state.
