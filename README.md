@@ -64,6 +64,12 @@ Delivery latency: ~20–30 seconds end-to-end in normal conditions.
 
 ### Run a validator
 
+```
+sudo N=1 MINIO_KEY=val1 MINIO_SECRET='...' PRIVATE_KEY=0x... \
+     BASE_RPCS='https://rpc.ankr.com/base/<YOUR_ANKR_KEY>,https://base-rpc.publicnode.com' \
+     bash 1-validator.sh
+```
+
 ```bash
 git clone https://github.com/GenesisL1/hyperlane-genesisl1-base.git
 cd hyperlane-genesisl1-base/validator
