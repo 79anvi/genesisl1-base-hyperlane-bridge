@@ -21,7 +21,7 @@ relayer — no canonical approval required.
 
 ```bash
 git clone https://github.com/GenesisL1/genesisl1-base-hyperlane-bridge.git
-cd genesisl1-base-hyperlane-bridge/validator
+cd genesisl1-base-hyperlane-bridge/relayer
 
 cp .env.example .env
 ```
