@@ -85,7 +85,7 @@ See [docs/validator-setup.md](docs/validator-setup.md) for the full guide.
 ### Run a relayer
 
 ```bash
-cd hyperlane-genesisl1-base/relayer
+cd genesisl1-base-hyperlane-bridge/relayer
 
 cp .env.example .env
 # edit .env, fill in HYP_DEFAULTSIGNER_KEY
